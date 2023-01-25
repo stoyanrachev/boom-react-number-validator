@@ -3,29 +3,25 @@ import { useState, useMemo } from "react";
 
 
 function isNumber(str) {
-  const re = /^[0-9\b]+$/;
-  if (!re.test(str)) {
+  const checkNum = new RegExp('^[0-9\b]+$');
+  if (checkNum.test(str)) {
+    return true;
+  } else {
     return false;
   }
-
-  return !isNaN(str);
 }
+
+
 
 function App() {
   const [num, setNum] = useState('');
-  const [icon, setIcon] = useState('fa-times');
 
-  
-  var checkNum = useMemo(() => isNumber(num), [num]);
+
+
+  const checkNum = useMemo(() => isNumber(num), [num]);
 
   const handleChange = event => {
     setNum(event.target.value);
-   
-    if (checkNum) {
-      setIcon('fa-check');
-    } else {
-      setIcon('fa-times');
-    }
   };
 
   return (
@@ -36,9 +32,10 @@ function App() {
           type="text"
           placeholder="Enter number..."
           onChange={handleChange}
+          value={num}
         />
         <span className="icon is-small is-right">
-          <i className={"fas " + icon} />
+          <i className={checkNum ? "fas fa-check" : "fas fa-times"} />
         </span>
       </div>
     </div>
