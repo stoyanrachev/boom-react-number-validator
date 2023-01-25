@@ -21,7 +21,7 @@ function App() {
   const handleChange = event => {
     setNum(event.target.value);
 
-    if (calculation) {
+    if (isNumber(event.target.value)) {
       setIcon('fa-check');
     } else {
       setIcon('fa-times');
