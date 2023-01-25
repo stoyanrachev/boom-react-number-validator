@@ -12,16 +12,16 @@ function isNumber(str) {
 }
 
 function App() {
-  const [input, setNum] = useState('');
+  const [num, setNum] = useState('');
   const [icon, setIcon] = useState('fa-times');
 
-
-  const calculation = useMemo(() => isNumber(input), [input]);
+  
+  var checkNum = useMemo(() => isNumber(num), [num]);
 
   const handleChange = event => {
     setNum(event.target.value);
-
-    if (isNumber(event.target.value)) {
+   
+    if (checkNum) {
       setIcon('fa-check');
     } else {
       setIcon('fa-times');
@@ -36,7 +36,6 @@ function App() {
           type="text"
           placeholder="Enter number..."
           onChange={handleChange}
-          value={input}
         />
         <span className="icon is-small is-right">
           <i className={"fas " + icon} />
